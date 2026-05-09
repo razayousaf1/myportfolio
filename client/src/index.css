@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: hsl(210, 40%, 98%);
-  --foreground: hsl(220, 13%, 46%);
+  --background: #020810;
+  --foreground: hsl(200, 7%, 91%);
   --card: hsl(0, 0%, 100%);
   --card-foreground: hsl(220, 13%, 46%);
   --popover: hsl(0, 0%, 100%);
@@ -171,4 +171,172 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+:root {
+  --bg-primary: #020810;
+  --bg-secondary: #060f1e;
+  --bg-card: rgba(6, 18, 38, 0.8);
+  --accent-cyan: #00d4ff;
+  --accent-blue: #0066ff;
+  --accent-glow: rgba(0, 212, 255, 0.15);
+  --text-primary: #e8f4ff;
+  --text-muted: #5a7a9a;
+  --text-dim: #8ab4d4;
+  --border-glow: rgba(0, 212, 255, 0.2);
+  --grid-color: rgba(0, 100, 200, 0.07);
+}
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+html {
+  scroll-behavior: smooth;
+}
+ 
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Syne', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+ 
+/* Global dark background with grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+ 
+/* Ambient glow orbs */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+ 
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(80px, 60px); }
+}
+ 
+/* All sections sit above grid */
+section, nav, footer {
+  position: relative;
+  z-index: 1;
+}
+ 
+/* Override light section backgrounds */
+.bg-slate-50,
+.bg-white {
+  background-color: var(--bg-secondary) !important;
+}
+ 
+/* Cards */
+.bg-white.rounded-xl,
+.bg-white.rounded-2xl {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-glow) !important;
+  backdrop-filter: blur(12px);
+}
+ 
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.02em;
+}
+ 
+/* Muted text */
+.text-muted,
+.text-slate-500,
+.text-slate-600 {
+  color: var(--text-dim) !important;
+}
+ 
+.text-secondary {
+  color: var(--text-primary) !important;
+}
+ 
+/* Glow text utility */
+.glow-text {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(0, 212, 255, 0.2);
+}
+ 
+/* Glowing border utility */
+.glow-border {
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px rgba(0, 212, 255, 0.03);
+}
+ 
+/* Skill bars */
+.bg-slate-200,
+.bg-slate-100 {
+  background-color: rgba(255,255,255,0.06) !important;
+}
+ 
+/* Nav */
+nav {
+  background: rgba(2, 8, 16, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glow) !important;
+}
+ 
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
+ 
+/* Scan line animation for hero */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 0.03; }
+  90%  { opacity: 0.03; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+ 
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(transparent, rgba(0, 212, 255, 0.03), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+ 
+/* Glowing button */
+.btn-glow {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.4), 0 0 40px rgba(0, 212, 255, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 102, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.2);
+  transform: translateY(-2px);
+}
+ 
+/* Section titles */
+.section-title-glow {
+  background: linear-gradient(135deg, #e8f4ff 30%, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
